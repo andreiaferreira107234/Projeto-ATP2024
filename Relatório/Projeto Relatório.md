@@ -332,14 +332,12 @@ def guardar(caminho_ficheiro, dados):
 - Outra que permite exportar em formato de json com a mesma estrutura do dataset
 
 ```py
-elif event_save == "-SAVE_JSON-":
-    caminho_arquivo_save = sg.popup_get_file("Save as", save_as=True, no_window=True, file_types=(("JSON Files", "*.json"),))
-    if caminho_arquivo_save:
-        try:
-            with open(caminho_arquivo_save, 'r', encoding='utf-8') as file:
-                dados_existentes = json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError):
-            dados_existentes = []
+elif event_save == "-SAVE_TEXT-":
+    caminho_arquivo = sg.popup_get_file("Save as", save_as=True, no_window=True, file_types=(("Text Files", "*.txt"),))
+    if caminho_arquivo:
+        with open(caminho_arquivo, 'a', encoding='utf-8') as f:
+            f.write(info_total)
+        sg.popup("Search saved successfully!")
 
         if isinstance(dados, list):
             dados_existentes.extend(dados)
